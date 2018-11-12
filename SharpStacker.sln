@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpStacker", "SharpStacker\SharpStacker.csproj", "{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56E8BE67-C7B8-40F8-906D-D2AC18D83FB2}
+	EndGlobalSection
+EndGlobal
