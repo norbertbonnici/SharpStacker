@@ -41,8 +41,12 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.contrastSlider = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contrastSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // btnUp
@@ -148,11 +152,45 @@
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(714, 322);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(48, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Next";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.moveFrame);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(606, 322);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(48, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Back";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.moveFrame);
+            // 
+            // contrastSlider
+            // 
+            this.contrastSlider.Location = new System.Drawing.Point(606, 370);
+            this.contrastSlider.Maximum = 100;
+            this.contrastSlider.Minimum = -100;
+            this.contrastSlider.Name = "contrastSlider";
+            this.contrastSlider.Size = new System.Drawing.Size(156, 45);
+            this.contrastSlider.TabIndex = 4;
+            this.contrastSlider.Value = 1;
+            this.contrastSlider.Scroll += new System.EventHandler(this.contrastSlider_Scroll);
+            // 
             // SharpStacker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(771, 450);
+            this.Controls.Add(this.contrastSlider);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.imageBox);
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnLeft);
@@ -166,6 +204,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contrastSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,6 +225,9 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TrackBar contrastSlider;
     }
 }
 
