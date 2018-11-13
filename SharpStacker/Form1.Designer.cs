@@ -103,7 +103,8 @@
             // 
             this.imageBox.Location = new System.Drawing.Point(12, 27);
             this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(588, 411);
+            this.imageBox.Size = new System.Drawing.Size(512, 1027);
+            this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.imageBox.TabIndex = 1;
             this.imageBox.TabStop = false;
             // 
@@ -187,7 +188,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 450);
+            this.ClientSize = new System.Drawing.Size(771, 701);
             this.Controls.Add(this.contrastSlider);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

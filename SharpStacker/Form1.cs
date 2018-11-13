@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BitMiracle.LibTiff.Classic;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -8,6 +9,8 @@ namespace SharpStacker
 {
     public partial class SharpStacker : Form
     {
+        private Bitmap stampa;
+
         public SharpStacker()
         {
             InitializeComponent();
@@ -41,8 +44,47 @@ namespace SharpStacker
         {
             openImage = new OpenFileDialog();
             openImage.ShowDialog();
-            Image stampa = Image.FromFile(openImage.FileName);
+            stampa = (Bitmap) Image.FromFile(openImage.FileName, true);
             imageBox.Image = stampa;
+            imageBox.Height = stampa.Height;
+            imageBox.Width = stampa.Width;
+
+            /*openImage = new OpenFileDialog();
+            openImage.ShowDialog();
+
+            /*using (var inputImage = Tiff.Open(openImage.FileName, "r"))
+            {
+                int width = inputImage.GetField(TiffTag.IMAGEWIDTH)[0].ToInt();
+                int height = inputImage.GetField(TiffTag.IMAGELENGTH)[0].ToInt();
+                byte[] inputImageData = new byte[width * height * 2];
+                var offset = 0;
+                for (int i = 0; i < inputImage.NumberOfStrips(); i++)
+                {
+                    offset += inputImage.ReadRawStrip(i, inputImageData, offset, (int)inputImage.RawStripSize(i));
+                }
+
+                /*var output = new Bitmap(width, height, PixelFormat.Format16bppGrayScale);
+                var rect = new Rectangle(0, 0, width, height);
+                var bmpData = output.LockBits(rect, ImageLockMode.ReadWrite, output.PixelFormat);
+
+                // Row-by-row copy
+                var arrRowLength = width * Image.GetPixelFormatSize(output.PixelFormat) / 8;
+                var ptr = bmpData.Scan0;
+                for (var i = 0; i < height; i++)
+                {
+                    Marshal.Copy(inputImageData, i * arrRowLength, ptr, arrRowLength);
+                    ptr += bmpData.Stride;
+                }
+
+                output.UnlockBits(bmpData);
+
+                //var stream = new System.IO.MemoryStream(inputImageData);
+                //stampa = (Bitmap)Image.FromStream(stream);
+
+                imageBox.Image = stampa;
+            } */
+
+
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,7 +102,7 @@ namespace SharpStacker
             TrackBar contrast = (TrackBar)sender;
             float contrastValue = contrast.Value;
 
-            imageBox.Image = AdjustContrast((Bitmap) imageBox.Image, contrastValue);       
+            imageBox.Image = AdjustContrast(stampa, contrastValue);       
         }
 
         public static Bitmap AdjustContrast(Bitmap Image, float Value)
@@ -85,7 +127,7 @@ namespace SharpStacker
                     {
                         byte B = row[columnOffset];
                         byte G = row[columnOffset + 1];
-                        byte R = row[columnOffset + 2];
+                        byte R = row[columnOffset + 2]; 
 
                         float Red = R / 255.0f;
                         float Green = G / 255.0f;
