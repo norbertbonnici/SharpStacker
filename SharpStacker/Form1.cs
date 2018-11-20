@@ -1,5 +1,7 @@
 ﻿using BitMiracle.LibTiff.Classic;
 using System;
+using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -9,7 +11,11 @@ namespace SharpStacker
 {
     public partial class SharpStacker : Form
     {
-        private Bitmap stampa;
+        private Form form;
+        private PictureBox imageBox;
+        private ArrayList stampi;
+        private int numberOfFrames, currentFrame;
+        private int moveBy = 1;
 
         public SharpStacker()
         {
@@ -23,6 +29,7 @@ namespace SharpStacker
             switch (direction.Text)
             {
                 case "Up":
+                    moveBy += moveBy;
                     break;
                 case "Down":
                     break;
@@ -44,47 +51,32 @@ namespace SharpStacker
         {
             openImage = new OpenFileDialog();
             openImage.ShowDialog();
-            stampa = (Bitmap) Image.FromFile(openImage.FileName, true);
-            imageBox.Image = stampa;
-            imageBox.Height = stampa.Height;
-            imageBox.Width = stampa.Width;
+            string imageName = openImage.FileName;
 
-            /*openImage = new OpenFileDialog();
-            openImage.ShowDialog();
+            Load16bitImagesToMemory(imageName);
+            currentFrame = 0;
+            numberOfFrames = stampi.Capacity;
+            lblTotalNoF.Text = numberOfFrames.ToString();
+            lblFrameNumber.Text = (currentFrame + 1).ToString();
 
-            /*using (var inputImage = Tiff.Open(openImage.FileName, "r"))
+            Bitmap stampa = (Bitmap)stampi[currentFrame];
+
+            form = new Form
             {
-                int width = inputImage.GetField(TiffTag.IMAGEWIDTH)[0].ToInt();
-                int height = inputImage.GetField(TiffTag.IMAGELENGTH)[0].ToInt();
-                byte[] inputImageData = new byte[width * height * 2];
-                var offset = 0;
-                for (int i = 0; i < inputImage.NumberOfStrips(); i++)
-                {
-                    offset += inputImage.ReadRawStrip(i, inputImageData, offset, (int)inputImage.RawStripSize(i));
-                }
+                Size = new Size(stampa.Width, stampa.Height),
+                Text = openImage.FileName.ToString()
+            };
 
-                /*var output = new Bitmap(width, height, PixelFormat.Format16bppGrayScale);
-                var rect = new Rectangle(0, 0, width, height);
-                var bmpData = output.LockBits(rect, ImageLockMode.ReadWrite, output.PixelFormat);
+            imageBox = new PictureBox
+            {
+                Location = new Point(0, 0),
+                Size = new Size(stampa.Width, stampa.Height),
+                Image = stampa
+            };
 
-                // Row-by-row copy
-                var arrRowLength = width * Image.GetPixelFormatSize(output.PixelFormat) / 8;
-                var ptr = bmpData.Scan0;
-                for (var i = 0; i < height; i++)
-                {
-                    Marshal.Copy(inputImageData, i * arrRowLength, ptr, arrRowLength);
-                    ptr += bmpData.Stride;
-                }
+            form.Controls.Add(imageBox);
 
-                output.UnlockBits(bmpData);
-
-                //var stream = new System.IO.MemoryStream(inputImageData);
-                //stampa = (Bitmap)Image.FromStream(stream);
-
-                imageBox.Image = stampa;
-            } */
-
-
+            form.Show();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,17 +84,55 @@ namespace SharpStacker
             Application.Exit();
         }
         
-        private void moveFrame(object sender, EventArgs e)
+        private void MoveFrame(object sender, EventArgs e)
         {
-            //int frames = imageBox.Image.GetFrameCount();
+            if (stampi != null)
+            {
+                if (sender is Button changeFrame)
+                {
+                    if (changeFrame.Text.Equals("Next"))
+                    {
+                        if (currentFrame < numberOfFrames - 1)
+                        {
+                            currentFrame++;
+                        }
+                    }
+                    if (changeFrame.Text.Equals("Back"))
+                    {
+                        if (currentFrame > 0)
+                        {
+                            currentFrame--;
+                        }
+                    }
+                }
+
+                Bitmap stampa = (Bitmap)stampi[currentFrame];
+
+                imageBox.Image = stampa;
+                lblFrameNumber.Text = (currentFrame + 1).ToString();
+
+                form.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("TIFF not loaded");            
+            }
         }
 
         private void contrastSlider_Scroll(object sender, EventArgs e)
         {
-            TrackBar contrast = (TrackBar)sender;
-            float contrastValue = contrast.Value;
+            if (stampi != null)
+            {
+                TrackBar contrast = (TrackBar)sender;
+                float contrastValue = contrast.Value;
 
-            imageBox.Image = AdjustContrast(stampa, contrastValue);       
+                imageBox.Image = AdjustContrast((Bitmap)stampi[currentFrame], contrastValue);
+                form.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("TIFF not loaded");
+            }
         }
 
         public static Bitmap AdjustContrast(Bitmap Image, float Value)
@@ -159,6 +189,98 @@ namespace SharpStacker
             NewBitmap.UnlockBits(data);
 
             return NewBitmap;
+        }
+
+        private void alphaSlider_Scroll(object sender, EventArgs e)
+        {
+            if (stampi != null)
+            {
+                TrackBar alpha = (TrackBar)sender;
+                float alphaValue = alpha.Value;
+                Bitmap stampa = (Bitmap)stampi[currentFrame];
+                Bitmap NewBitmap = (Bitmap)stampa.Clone();
+                BitmapData data = NewBitmap.LockBits(
+                    new Rectangle(0, 0, NewBitmap.Width, NewBitmap.Height),
+                    ImageLockMode.ReadWrite,
+                    NewBitmap.PixelFormat);
+                int Height = NewBitmap.Height;
+                int Width = NewBitmap.Width;
+            }
+        }
+
+        private void fineCoarse_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbCoarse.Checked)
+            {
+                moveBy = 10;
+            }
+            else if (rbFine.Checked)
+            {
+                moveBy = 1;
+            }
+        }
+
+        private void Load16bitImagesToMemory(string fileName)
+        {
+            Bitmap stampa16;
+            using (Tiff input = Tiff.Open(fileName, "r"))
+            {
+                var pages = input.NumberOfDirectories();
+                stampi = new ArrayList(pages);
+
+                for (int p = 0; p < pages; p++)
+                {
+                    int width = input.GetField(TiffTag.IMAGEWIDTH)[0].ToInt();
+                    int height = input.GetField(TiffTag.IMAGELENGTH)[0].ToInt();
+                    int samplesPerPixel = input.GetField(TiffTag.SAMPLESPERPIXEL)[0].ToInt();
+                    int bitsPerSample = input.GetField(TiffTag.BITSPERSAMPLE)[0].ToInt();
+                    int photo = input.GetField(TiffTag.PHOTOMETRIC)[0].ToInt();
+
+                    int scanlineSize = input.ScanlineSize();
+
+                    stampa16 = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
+                    int pixelSize = 1;
+                    var rect = new Rectangle(0, 0, width, height);
+                    var bitmapData = stampa16.LockBits(rect, ImageLockMode.WriteOnly, stampa16.PixelFormat);
+                    var bitmapBytes = new byte[width * height * pixelSize];
+
+                    for (int y = 0; y < height; y++)
+                    {
+                        byte[] buffer_i = new byte[scanlineSize];
+                        input.ReadScanline(buffer_i, y);
+
+                        for (int x = 0; x < width * 2; x++)
+                        {
+                            var value = (byte)(BitConverter.ToUInt16(new byte[2] { buffer_i[x], buffer_i[x + 1] }, 0) / 255);
+                            var i = ((y * width) + (x / 2));
+                            bitmapBytes[i] = value;
+                            x++;
+                        }
+
+                        /*for (int x = 0; x < width * 2; x++)
+                        {
+                            var i = ((y * width) + (x / 2));
+                            var value = (byte) (BitConverter.ToUInt16(new byte[2] { buffer_i[x+1], buffer_i[x] }, 0) / 255);
+
+                            int j1 = i * 3;
+                            bitmapBytes[j1] = value;//B
+                            bitmapBytes[j1+1] = value;//G
+                            bitmapBytes[j1+2] = value;//R
+                            x++;
+                        }*/
+                    }
+
+                    // Copy the randomized bits to the bitmap pointer.
+                    var ptr = bitmapData.Scan0;
+                    Marshal.Copy(bitmapBytes, 0, ptr, bitmapBytes.Length);
+
+                    // Unlock the bitmap, we're all done.
+                    stampa16.UnlockBits(bitmapData);
+                    stampi.Add(stampa16);
+
+                    input.ReadDirectory();
+                }
+            }
         }
     }
 }
