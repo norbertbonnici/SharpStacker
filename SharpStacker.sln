@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpStacker", "SharpStacker\SharpStacker.csproj", "{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpStackerTests", "SharpStackerTests\SharpStackerTests.csproj", "{91BDB4D5-84F8-4753-A82E-6FC148269D44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1DCBF05-C0A9-463E-B3CD-B215C9D0B5A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91BDB4D5-84F8-4753-A82E-6FC148269D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91BDB4D5-84F8-4753-A82E-6FC148269D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91BDB4D5-84F8-4753-A82E-6FC148269D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91BDB4D5-84F8-4753-A82E-6FC148269D44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

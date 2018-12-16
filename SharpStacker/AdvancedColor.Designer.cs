@@ -16,6 +16,7 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+                area.Dispose();
             }
             base.Dispose(disposing);
         }

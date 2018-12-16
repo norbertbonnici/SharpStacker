@@ -170,7 +170,7 @@ namespace SharpStacker
                             outputBuffer[x] = Gray;
                         }
 
-                        byte[] buffer = new byte[outputBuffer.Length * currentFrame.bitsPerSample];
+                        byte[] buffer = new byte[outputBuffer.Length * (currentFrame.bitsPerSample/8)];
                         Buffer.BlockCopy(outputBuffer, 0, buffer, 0, buffer.Length);
                         output.WriteScanline(buffer, y);
                     }

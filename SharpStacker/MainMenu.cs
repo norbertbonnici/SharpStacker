@@ -140,6 +140,12 @@ namespace SharpStacker
                 case Keys.Left:
                     xDelta += moveBy;
                     break;
+                case Keys.PageUp:
+                    MoveFrame(true, false);
+                    break;
+                case Keys.PageDown:
+                    MoveFrame(false, true);
+                    break;
                 default:
                     break;
             }
@@ -162,30 +168,46 @@ namespace SharpStacker
                 {
                     if (changeFrame.Text.Equals("Next"))
                     {
-                        if (currentFrame < parser.numberOfFrames - 1)
-                        {
-                            currentFrame++;
-                        }
+                        MoveFrame(true, false);
                     }
                     if (changeFrame.Text.Equals("Back"))
                     {
-                        if (currentFrame > 0)
-                        {
-                            currentFrame--;
-                        }
+                        MoveFrame(false, true);
                     }
                 }
-
-                lblFrameNumber.Text = (currentFrame + 1).ToString();
-                imageBox.Image = parser.AdjustContrast(currentFrame, contrastValue);
-                form.Refresh();
-                c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
-                c.Refresh();
             }
             else
             {
                 MessageBox.Show("TIFF not loaded");            
             }
+        }
+
+        private void MoveFrame(bool moveNext, bool moveBack)
+        {
+            if (moveNext)
+            {
+                if (currentFrame < parser.numberOfFrames - 1)
+                {
+                    currentFrame++;
+                }
+            }
+            else if (moveBack)
+            {
+                if (currentFrame > 0)
+                {
+                    currentFrame--;
+                }
+            }
+            else
+            {
+                return;
+            }
+
+            lblFrameNumber.Text = (currentFrame + 1).ToString();
+            imageBox.Image = parser.AdjustContrast(currentFrame, contrastValue);
+            form.Refresh();
+            c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
+            c.Refresh();
         }
 
         private void contrastSlider_Scroll(object sender, EventArgs e)
