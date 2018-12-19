@@ -76,7 +76,7 @@
             this.btnUp.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnUp.Enabled = false;
             this.btnUp.Location = new System.Drawing.Point(106, 30);
-            this.btnUp.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnUp.Margin = new System.Windows.Forms.Padding(6);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(132, 44);
             this.btnUp.TabIndex = 0;
@@ -89,7 +89,7 @@
             this.btnDown.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnDown.Enabled = false;
             this.btnDown.Location = new System.Drawing.Point(106, 150);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDown.Margin = new System.Windows.Forms.Padding(6);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(132, 44);
             this.btnDown.TabIndex = 0;
@@ -102,7 +102,7 @@
             this.btnLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnLeft.Enabled = false;
             this.btnLeft.Location = new System.Drawing.Point(10, 30);
-            this.btnLeft.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLeft.Margin = new System.Windows.Forms.Padding(6);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(96, 164);
             this.btnLeft.TabIndex = 0;
@@ -115,7 +115,7 @@
             this.btnRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnRight.Enabled = false;
             this.btnRight.Location = new System.Drawing.Point(238, 30);
-            this.btnRight.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRight.Margin = new System.Windows.Forms.Padding(6);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(96, 164);
             this.btnRight.TabIndex = 0;
@@ -128,7 +128,7 @@
             this.btnStack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStack.Enabled = false;
             this.btnStack.Location = new System.Drawing.Point(10, 30);
-            this.btnStack.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnStack.Margin = new System.Windows.Forms.Padding(6);
             this.btnStack.Name = "btnStack";
             this.btnStack.Size = new System.Drawing.Size(324, 164);
             this.btnStack.TabIndex = 0;
@@ -225,7 +225,7 @@
             // 
             this.btnNext.Enabled = false;
             this.btnNext.Location = new System.Drawing.Point(12, 92);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(6);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(96, 44);
             this.btnNext.TabIndex = 3;
@@ -237,7 +237,7 @@
             // 
             this.btnBack.Enabled = false;
             this.btnBack.Location = new System.Drawing.Point(12, 37);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(6);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(96, 44);
             this.btnBack.TabIndex = 3;
@@ -250,7 +250,7 @@
             this.contrastSlider.AccessibleName = "Contrast";
             this.contrastSlider.Enabled = false;
             this.contrastSlider.Location = new System.Drawing.Point(12, 62);
-            this.contrastSlider.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.contrastSlider.Margin = new System.Windows.Forms.Padding(6);
             this.contrastSlider.Maximum = 100;
             this.contrastSlider.Minimum = -100;
             this.contrastSlider.Name = "contrastSlider";
@@ -269,7 +269,7 @@
             this.groupBox1.Controls.Add(this.btnLeft);
             this.groupBox1.Controls.Add(this.btnStack);
             this.groupBox1.Location = new System.Drawing.Point(24, 52);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10, 6, 10, 10);
             this.groupBox1.Size = new System.Drawing.Size(344, 204);
@@ -286,9 +286,9 @@
             this.groupBox2.Controls.Add(this.btnNext);
             this.groupBox2.Controls.Add(this.btnBack);
             this.groupBox2.Location = new System.Drawing.Point(24, 285);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(344, 146);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
@@ -344,9 +344,9 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Location = new System.Drawing.Point(376, 162);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox3.Size = new System.Drawing.Size(340, 269);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
@@ -358,7 +358,7 @@
             this.alphaSlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.alphaSlider.Enabled = false;
             this.alphaSlider.Location = new System.Drawing.Point(16, 171);
-            this.alphaSlider.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.alphaSlider.Margin = new System.Windows.Forms.Padding(6);
             this.alphaSlider.Maximum = 255;
             this.alphaSlider.Name = "alphaSlider";
             this.alphaSlider.Size = new System.Drawing.Size(312, 90);
@@ -395,7 +395,7 @@
             this.groupBox4.Controls.Add(this.rbFine);
             this.groupBox4.Controls.Add(this.rbCoarse);
             this.groupBox4.Location = new System.Drawing.Point(382, 54);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(20, 19, 20, 19);
             this.groupBox4.Size = new System.Drawing.Size(334, 96);
@@ -408,7 +408,7 @@
             this.rbFine.AutoSize = true;
             this.rbFine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rbFine.Location = new System.Drawing.Point(132, 43);
-            this.rbFine.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbFine.Margin = new System.Windows.Forms.Padding(6);
             this.rbFine.Name = "rbFine";
             this.rbFine.Size = new System.Drawing.Size(182, 34);
             this.rbFine.TabIndex = 1;
@@ -422,7 +422,7 @@
             this.rbCoarse.Checked = true;
             this.rbCoarse.Dock = System.Windows.Forms.DockStyle.Left;
             this.rbCoarse.Location = new System.Drawing.Point(20, 43);
-            this.rbCoarse.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbCoarse.Margin = new System.Windows.Forms.Padding(6);
             this.rbCoarse.Name = "rbCoarse";
             this.rbCoarse.Size = new System.Drawing.Size(112, 34);
             this.rbCoarse.TabIndex = 0;
@@ -433,8 +433,9 @@
             // 
             // SharpStacker
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(740, 442);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -443,7 +444,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SharpStacker";
             this.Text = "Sharp Stacker";
             this.menuStrip1.ResumeLayout(false);
