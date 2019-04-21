@@ -28,13 +28,14 @@ namespace SharpStacker
         {
             contrastSlider.Enabled = true;
             alphaSlider.Enabled = true;
+            deleteImage.Enabled = true;
             btnBack.Enabled = true;
             btnNext.Enabled = true;
             btnUp.Enabled = true;
             btnDown.Enabled = true;
             btnLeft.Enabled = true;
             btnRight.Enabled = true;
-            btnStack.Enabled = true;
+            //btnStack.Enabled = true;
             rbCoarse.Checked = true;
         }
 
@@ -66,7 +67,7 @@ namespace SharpStacker
             form.Refresh();
         }
 
-        private void StackImage(object sender, EventArgs e)
+        /*private void StackImage(object sender, EventArgs e)
         {
             if (currentFrame < parser.numberOfFrames - 1)
             {
@@ -75,10 +76,10 @@ namespace SharpStacker
                 lblFrameNumber.Text = (currentFrame + 1).ToString();
                 alphaSlider.Value = 255;
                 form.Refresh();
-                c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
-                c.Refresh();
+                //c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
+                //c.Refresh();
             }
-        }
+        }*/
 
         private void OpenImage(object sender, EventArgs e)
         {
@@ -114,9 +115,7 @@ namespace SharpStacker
                 form.Show();
                 imageLoaded = true;
 
-                c = new AdvancedColor();
-                c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
-                c.Show();
+                
             }
             
         }
@@ -206,11 +205,11 @@ namespace SharpStacker
             lblFrameNumber.Text = (currentFrame + 1).ToString();
             imageBox.Image = parser.AdjustContrast(currentFrame, contrastValue);
             form.Refresh();
-            c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
-            c.Refresh();
+            //c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
+            //c.Refresh();
         }
 
-        private void contrastSlider_Scroll(object sender, EventArgs e)
+        private void ScrollContrastSlider(object sender, EventArgs e)
         {
             if (imageLoaded)
             {
@@ -226,7 +225,7 @@ namespace SharpStacker
             }
         }
 
-        private void alphaSlider_Scroll(object sender, EventArgs e)
+        private void ScrollAlphaSlider(object sender, EventArgs e)
         {
             if (imageLoaded)
             {
@@ -259,15 +258,23 @@ namespace SharpStacker
             }
         }
 
-        private void settingsMenu_Click(object sender, EventArgs e)
+        private void OpenSettings(object sender, EventArgs e)
         {
-
+            c = new AdvancedColor();
+            c.UpdateChart(parser.PrepareColorGraph(currentFrame), currentFrame);
+            c.Show();
         }
 
-        private void aboutMenu_Click(object sender, EventArgs e)
+        private void OpenAboutMenu(object sender, EventArgs e)
         {
             About form = new About();
             form.Show();
+        }
+
+        private void deleteImage_Click(object sender, EventArgs e)
+        {
+            parser.ToggleDeleteStatus(currentFrame);
+            deletedStatus.ForeColor = Color.Red;
         }
     }
 }

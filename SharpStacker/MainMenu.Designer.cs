@@ -33,7 +33,6 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
-            this.btnStack = new System.Windows.Forms.Button();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveImage = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -62,6 +61,8 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rbFine = new System.Windows.Forms.RadioButton();
             this.rbCoarse = new System.Windows.Forms.RadioButton();
+            this.deleteImage = new System.Windows.Forms.Button();
+            this.deletedStatus = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contrastSlider)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -122,19 +123,6 @@
             this.btnRight.Text = "Right";
             this.btnRight.UseVisualStyleBackColor = true;
             this.btnRight.Click += new System.EventHandler(this.MoveImage);
-            // 
-            // btnStack
-            // 
-            this.btnStack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStack.Enabled = false;
-            this.btnStack.Location = new System.Drawing.Point(10, 30);
-            this.btnStack.Margin = new System.Windows.Forms.Padding(6);
-            this.btnStack.Name = "btnStack";
-            this.btnStack.Size = new System.Drawing.Size(324, 164);
-            this.btnStack.TabIndex = 0;
-            this.btnStack.Text = "Stack";
-            this.btnStack.UseVisualStyleBackColor = true;
-            this.btnStack.Click += new System.EventHandler(this.StackImage);
             // 
             // openDialog
             // 
@@ -202,9 +190,9 @@
             // settingsMenu
             // 
             this.settingsMenu.Name = "settingsMenu";
-            this.settingsMenu.Size = new System.Drawing.Size(200, 38);
+            this.settingsMenu.Size = new System.Drawing.Size(324, 38);
             this.settingsMenu.Text = "Settings";
-            this.settingsMenu.Click += new System.EventHandler(this.settingsMenu_Click);
+            this.settingsMenu.Click += new System.EventHandler(this.OpenSettings);
             // 
             // helpToolStripMenuItem
             // 
@@ -219,7 +207,7 @@
             this.aboutMenu.Name = "aboutMenu";
             this.aboutMenu.Size = new System.Drawing.Size(179, 38);
             this.aboutMenu.Text = "About";
-            this.aboutMenu.Click += new System.EventHandler(this.aboutMenu_Click);
+            this.aboutMenu.Click += new System.EventHandler(this.OpenAboutMenu);
             // 
             // btnNext
             // 
@@ -259,7 +247,7 @@
             this.contrastSlider.Tag = "Contrast";
             this.contrastSlider.TickFrequency = 10;
             this.contrastSlider.Value = 1;
-            this.contrastSlider.Scroll += new System.EventHandler(this.contrastSlider_Scroll);
+            this.contrastSlider.Scroll += new System.EventHandler(this.ScrollContrastSlider);
             // 
             // groupBox1
             // 
@@ -267,7 +255,6 @@
             this.groupBox1.Controls.Add(this.btnUp);
             this.groupBox1.Controls.Add(this.btnRight);
             this.groupBox1.Controls.Add(this.btnLeft);
-            this.groupBox1.Controls.Add(this.btnStack);
             this.groupBox1.Location = new System.Drawing.Point(24, 52);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
@@ -279,6 +266,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.deletedStatus);
+            this.groupBox2.Controls.Add(this.deleteImage);
             this.groupBox2.Controls.Add(this.lblTotalNoF);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.lblFrameNumber);
@@ -297,7 +286,7 @@
             // lblTotalNoF
             // 
             this.lblTotalNoF.AutoSize = true;
-            this.lblTotalNoF.Location = new System.Drawing.Point(200, 90);
+            this.lblTotalNoF.Location = new System.Drawing.Point(189, 90);
             this.lblTotalNoF.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblTotalNoF.Name = "lblTotalNoF";
             this.lblTotalNoF.Size = new System.Drawing.Size(24, 25);
@@ -307,7 +296,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(174, 90);
+            this.label4.Location = new System.Drawing.Point(160, 90);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 25);
@@ -318,7 +307,7 @@
             // lblFrameNumber
             // 
             this.lblFrameNumber.AutoSize = true;
-            this.lblFrameNumber.Location = new System.Drawing.Point(200, 58);
+            this.lblFrameNumber.Location = new System.Drawing.Point(189, 58);
             this.lblFrameNumber.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFrameNumber.Name = "lblFrameNumber";
             this.lblFrameNumber.Size = new System.Drawing.Size(24, 25);
@@ -329,7 +318,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(144, 58);
+            this.label1.Location = new System.Drawing.Point(128, 58);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 25);
@@ -366,7 +355,7 @@
             this.alphaSlider.Tag = "Alpha";
             this.alphaSlider.TickFrequency = 16;
             this.alphaSlider.Value = 255;
-            this.alphaSlider.Scroll += new System.EventHandler(this.alphaSlider_Scroll);
+            this.alphaSlider.Scroll += new System.EventHandler(this.ScrollAlphaSlider);
             // 
             // label6
             // 
@@ -431,6 +420,26 @@
             this.rbCoarse.UseVisualStyleBackColor = true;
             this.rbCoarse.CheckedChanged += new System.EventHandler(this.fineCoarse_CheckedChanged);
             // 
+            // deleteImage
+            // 
+            this.deleteImage.Enabled = false;
+            this.deleteImage.Location = new System.Drawing.Point(240, 90);
+            this.deleteImage.Name = "deleteImage";
+            this.deleteImage.Size = new System.Drawing.Size(95, 43);
+            this.deleteImage.TabIndex = 9;
+            this.deleteImage.Text = "Delete";
+            this.deleteImage.UseVisualStyleBackColor = true;
+            this.deleteImage.Click += new System.EventHandler(this.deleteImage_Click);
+            // 
+            // deletedStatus
+            // 
+            this.deletedStatus.Enabled = false;
+            this.deletedStatus.Location = new System.Drawing.Point(291, 36);
+            this.deletedStatus.Name = "deletedStatus";
+            this.deletedStatus.Size = new System.Drawing.Size(42, 38);
+            this.deletedStatus.TabIndex = 10;
+            this.deletedStatus.UseVisualStyleBackColor = true;
+            // 
             // SharpStacker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -469,7 +478,6 @@
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnRight;
-        private System.Windows.Forms.Button btnStack;
         private System.Windows.Forms.OpenFileDialog openDialog;
         private System.Windows.Forms.SaveFileDialog saveImage;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -498,6 +506,8 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button deleteImage;
+        private System.Windows.Forms.Button deletedStatus;
     }
 }
 

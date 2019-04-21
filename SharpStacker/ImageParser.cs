@@ -170,7 +170,7 @@ namespace SharpStacker
                             outputBuffer[x] = Gray;
                         }
 
-                        byte[] buffer = new byte[outputBuffer.Length * (currentFrame.bitsPerSample/8)];
+                        byte[] buffer = new byte[outputBuffer.Length * (currentFrame.bitsPerSample / 8)];
                         Buffer.BlockCopy(outputBuffer, 0, buffer, 0, buffer.Length);
                         output.WriteScanline(buffer, y);
                     }
@@ -259,6 +259,12 @@ namespace SharpStacker
             bitmap.UnlockBits(data);
 
             return bitmap;
+        }
+
+        public void ToggleDeleteStatus(int frameNumber)
+        {
+            Frame currentFrame = (Frame)frameArray[frameNumber];
+            currentFrame.isDeleted = !currentFrame.isDeleted;
         }
     }
 }

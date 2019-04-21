@@ -13,6 +13,7 @@ namespace SharpStacker
             width = _width;
             height = _height;
             imageData = new ArrayList(height);
+            isDeleted = false;
         }
 
         public int xDelta;
@@ -22,6 +23,7 @@ namespace SharpStacker
         public ArrayList imageData;
         public int width;
         public int height;
+        public bool isDeleted;
 
         public BitMiracle.LibTiff.Classic.PlanarConfig planarConfig;
         public BitMiracle.LibTiff.Classic.Photometric photo;
